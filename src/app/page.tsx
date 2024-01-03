@@ -1,6 +1,7 @@
 import MaxWidthWrapper from '@/components/all/MaxWidthWrapper';
 import Navbar from '@/components/all/Navbar';
 import { Button } from '@/components/ui/button';
+import { auth, useUser } from '@clerk/nextjs';
 import { Dumbbell, LineChart, PenLine } from 'lucide-react';
 import Link from 'next/link';
 
@@ -24,6 +25,8 @@ const perks = [
 ];
 
 export default function Home() {
+  const { userId } = auth();
+
   return (
     <>
       <Navbar />
@@ -38,9 +41,9 @@ export default function Home() {
             </p>
           </div>
 
-          <Link href={'/sign-up'}>
+          <Link href={userId ? '/dashboard' : '/sign-up'}>
             <Button variant={'outline'} size={'lg'} className='rounded-full '>
-              Sign Up &rarr;
+              {userId ? 'Dashboard' : 'Sign Up \u2192'}
             </Button>
           </Link>
         </section>

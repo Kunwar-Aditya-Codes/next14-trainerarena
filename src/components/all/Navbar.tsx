@@ -1,9 +1,14 @@
+'use client';
+
 import Image from 'next/image';
 import MaxWidthWrapper from './MaxWidthWrapper';
 import { Button } from '../ui/button';
 import Link from 'next/link';
+import { UserButton, useAuth } from '@clerk/nextjs';
 
 const Navbar = () => {
+  const { isSignedIn } = useAuth();
+
   return (
     <div className='shadow-sm sticky top-0 py-3 border-b-muted bg-background border-b'>
       <MaxWidthWrapper>
@@ -19,9 +24,13 @@ const Navbar = () => {
           </Link>
 
           <div>
-            <Button className='rounded-full'>
-              <Link href={'/sign-in'}>Sign In</Link>
-            </Button>
+            {isSignedIn ? (
+              <UserButton afterSignOutUrl='/' />
+            ) : (
+              <Button className='rounded-full'>
+                <Link href={'/sign-in'}>Sign In</Link>
+              </Button>
+            )}
           </div>
         </div>
       </MaxWidthWrapper>

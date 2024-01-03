@@ -11,7 +11,7 @@ export default function Page() {
         height={500}
         width={500}
       />
-      <SignIn />
+      <SignIn afterSignInUrl={'/dashboard'} />
     </div>
   );
 }
