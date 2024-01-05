@@ -13,9 +13,9 @@ const ITEMS = [
     href: '/dashboard',
   },
   {
-    label: 'Users',
+    label: 'Clients',
     icon: <Users className='w-5 h-5' />,
-    href: '/dashboard/users',
+    href: '/dashboard/clients',
   },
   {
     label: 'Exercises',
@@ -49,7 +49,9 @@ const SidebarItems = () => {
               >
                 {item.icon}
                 {!collapsed && (
-                  <p className='truncate text-lg tracking-wide'>{item.label}</p>
+                  <p className='truncate text-lg tracking-wide font-normal'>
+                    {item.label}
+                  </p>
                 )}
               </div>
             </Link>

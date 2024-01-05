@@ -10,9 +10,9 @@ const Navbar = () => {
   const { isSignedIn } = useAuth();
 
   return (
-    <div className='shadow-sm sticky top-0 py-3 border-b-muted bg-background border-b'>
+    <div className='shadow-sm sticky top-0 py-3 border-b-muted bg-background border-b z-10'>
       <MaxWidthWrapper>
-        <div className='flex items-center justify-between'>
+        <div className='flex items-center justify-between '>
           <Link href={'/'}>
             <Image
               src={'/main-logo.png'}
