@@ -31,9 +31,9 @@ const Sidebar = () => {
         }
       >
         <div className='p-3 pl-6 mb-2 hidden lg:flex items-center justify-end w-full'>
-          <Skeleton className='h-6 w-6' />
+          <Skeleton className='h-6 w-6 rounded-full' />
         </div>
-        <ul className='px-2 pt-2 lg:pt-0'>
+        <ul className='px-2 grid grid-cols-1 gap-y-8 mt-4 pt-2 lg:pt-0'>
           {[...Array(3)].map((_, i) => (
             <SidebarSkeleton key={i} />
           ))}

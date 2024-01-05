@@ -1,34 +1,59 @@
 'use client';
 
-import { LayoutDashboard } from 'lucide-react';
+import { useSidebar } from '@/hooks/useSidebar';
+import { cn } from '@/lib/utils';
+import { LayoutDashboard, Users, Dumbbell } from 'lucide-react';
 import Link from 'next/link';
+import { Button } from '../ui/button';
 
 const ITEMS = [
   {
     label: 'Dashboard',
-    icon: <LayoutDashboard className='w-5 h-5' />,
+    icon: <LayoutDashboard className='w-16 h-16 lg:w-5 lg:h-5' />,
+    href: '/dashboard',
   },
   {
     label: 'Users',
-    icon: <LayoutDashboard className='w-5 h-5' />,
+    icon: <Users className='w-5 h-5' />,
+    href: '/dashboard/users',
   },
   {
-    label: 'Excercises',
-    icon: <LayoutDashboard className='w-5 h-5' />,
+    label: 'Exercises',
+    icon: <Dumbbell className='w-5 h-5' />,
+    href: '/dashboard/exercises',
   },
 ];
 
 const SidebarItems = () => {
+  const { collapsed } = useSidebar((state) => state);
+
   return (
     <div className='h-full'>
-      <div className='grid grid-cols-1 gap-y-8 justify-items-center mt-4 px-4 '>
+      <div className='space-y-8 p-2'>
         {ITEMS.map((item) => (
-          <Link key={item.label} href='/dashboard' className='w-full'>
-            <ul className='flex items-center space-x-6 hover:bg-white/5 w-full py-3  pl-4'>
-              <li className=''>{item.icon}</li>
-              <li className='text-lg'>{item.label}</li>
-            </ul>
-          </Link>
+          <Button
+            key={item.label}
+            asChild
+            variant={'ghost'}
+            className={cn(
+              'w-full h-12 ',
+              collapsed ? 'justify-center' : 'justify-start'
+            )}
+          >
+            <Link href={item.href}>
+              <div
+                className={cn(
+                  'flex items-center w-full gap-x-4',
+                  collapsed && 'justify-center'
+                )}
+              >
+                {item.icon}
+                {!collapsed && (
+                  <p className='truncate text-lg tracking-wide'>{item.label}</p>
+                )}
+              </div>
+            </Link>
+          </Button>
         ))}
       </div>
     </div>
