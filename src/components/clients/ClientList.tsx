@@ -5,6 +5,8 @@ import {
   flexRender,
   getCoreRowModel,
   getPaginationRowModel,
+  getFilteredRowModel,
+  ColumnFiltersState,
   useReactTable,
 } from '@tanstack/react-table';
 import {
@@ -16,6 +18,8 @@ import {
   TableRow,
 } from '../ui/table';
 import { Button } from '../ui/button';
+import { Input } from '../ui/input';
+import { useState } from 'react';
 
 interface ClientListProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -26,15 +30,37 @@ const ClientList = <TData, TValue>({
   columns,
   data,
 }: ClientListProps<TData, TValue>) => {
+  const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
+
   const table = useReactTable({
     data,
     columns,
     getCoreRowModel: getCoreRowModel(),
+    onColumnFiltersChange: setColumnFilters,
+    getFilteredRowModel: getFilteredRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
+    state: {
+      columnFilters,
+    },
   });
   return (
     <div>
-      <div className='rounded-md border '>
+      <div className='flex items-center justify-between py-4'>
+        <Input
+          placeholder='Search client...'
+          value={
+            (table.getColumn('username')?.getFilterValue() as string) ?? ''
+          }
+          onChange={(event) =>
+            table.getColumn('username')?.setFilterValue(event.target.value)
+          }
+          className='max-w-sm'
+        />
+        <Button variant={'outline'} className='shadow-lg'>
+          Add Client
+        </Button>
+      </div>
+      <div className='rounded-md border'>
         <Table>
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (

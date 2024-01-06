@@ -11,7 +11,7 @@ const data = [
   },
   {
     id: '2',
-    username: 'Aditya',
+    username: 'jayesh',
     email: 'aditya',
   },
   {
@@ -84,15 +84,11 @@ const data = [
 const Clients = () => {
   return (
     <MaxWidthWrapper className='h-full '>
-      <div className='h-full flex-1'>
-        <div className='flex items-center justify-end border-b pb-4'>
-          <Button variant={'outline'} className='shadow-lg'>
-            Add Client
-          </Button>
-        </div>
-        <div className='mt-8 '>
-          <ClientList columns={columns} data={data} />
-        </div>
+      <div className='mb-8 mt-4'>
+        <h1 className='text-4xl font-bold'>Clients</h1>
+      </div>
+      <div className='mt-8 h-full flex-1 '>
+        <ClientList columns={columns} data={data} />
       </div>
     </MaxWidthWrapper>
   );
