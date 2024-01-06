@@ -20,6 +20,7 @@ import {
 import { Button } from '../ui/button';
 import { Input } from '../ui/input';
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 interface ClientListProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -31,6 +32,7 @@ const ClientList = <TData, TValue>({
   data,
 }: ClientListProps<TData, TValue>) => {
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
+  const router = useRouter();
 
   const table = useReactTable({
     data,
@@ -43,9 +45,10 @@ const ClientList = <TData, TValue>({
       columnFilters,
     },
   });
+
   return (
     <div>
-      <div className='flex items-center justify-between py-4'>
+      <div className='flex flex-col-reverse gap-y-4 lg:flex-row lg:items-center lg:justify-between'>
         <Input
           placeholder='Search client...'
           value={
@@ -56,11 +59,11 @@ const ClientList = <TData, TValue>({
           }
           className='max-w-sm'
         />
-        <Button variant={'outline'} className='shadow-lg'>
+        <Button variant={'secondary'} className='shadow-lg'>
           Add Client
         </Button>
       </div>
-      <div className='rounded-md border'>
+      <div className='rounded-md border mt-4'>
         <Table>
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
@@ -86,7 +89,7 @@ const ClientList = <TData, TValue>({
                 <TableRow
                   key={row.id}
                   data-state={row.getIsSelected() && 'selected'}
-                  className='cursor-pointer hover:bg-white/5'
+                  className=' hover:bg-white/5'
                 >
                   {row.getVisibleCells().map((cell) => (
                     <TableCell key={cell.id} className=''>

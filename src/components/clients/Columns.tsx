@@ -4,6 +4,7 @@ import { ArrowUpDown } from 'lucide-react';
 import { ColumnDef } from '@tanstack/react-table';
 import { Button } from '../ui/button';
 import Delete from './Delete';
+import Link from 'next/link';
 
 export type Client = {
   id: string;
@@ -28,6 +29,13 @@ export const columns: ColumnDef<Client>[] = [
     id: 'actions',
     accessorKey: 'actions',
     header: 'Actions',
-    cell: ({ row }) => <Delete clientId={row.original.id} />,
+    cell: ({ row }) => (
+      <div className='flex items-center justify-center space-x-4'>
+        <Button size={'sm'} asChild>
+          <Link href={`/dashboard/clients/${row.original.username}`}>View</Link>
+        </Button>
+        <Delete clientId={row.original.id} />
+      </div>
+    ),
   },
 ];

@@ -5,14 +5,19 @@ import MaxWidthWrapper from './MaxWidthWrapper';
 import { Button } from '../ui/button';
 import Link from 'next/link';
 import { UserButton, useAuth } from '@clerk/nextjs';
+import { usePathname } from 'next/navigation';
+import { cn } from '@/lib/utils';
 
 const Navbar = () => {
   const { isSignedIn } = useAuth();
+  const path = usePathname();
+
+  const isDashboard = path?.includes('/dashboard');
 
   return (
-    <div className='shadow-sm sticky top-0 py-3 border-b-muted bg-background border-b z-10'>
-      <MaxWidthWrapper>
-        <div className='flex items-center justify-between '>
+    <div className='shadow-sm h-20 fixed w-full top-0 py-3 border-b-muted bg-background border-b z-10'>
+      <MaxWidthWrapper className={cn(isDashboard && 'max-w-full')}>
+        <div className='flex items-center justify-between'>
           <Link href={'/'}>
             <Image
               src={'/main-logo.png'}

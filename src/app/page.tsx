@@ -30,7 +30,7 @@ export default function Home() {
   return (
     <>
       <Navbar />
-      <MaxWidthWrapper>
+      <MaxWidthWrapper className='mt-20'>
         <section className='my-16 pt-6 pb-28 flex flex-col  items-center justify-center'>
           <div className='my-16'>
             <h1 className='text-6xl lg:text-8xl text-center font-bold text-white/85 tracking-wider'>

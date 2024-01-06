@@ -4,9 +4,9 @@ import Sidebar from '@/components/dashboard/Sidebar';
 
 const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
   return (
-    <div className=' flex flex-col min-h-screen'>
+    <div className=''>
       <Navbar />
-      <div className='flex flex-grow '>
+      <div className='flex flex-grow mt-20'>
         <Sidebar />
         <Container>{children}</Container>
       </div>

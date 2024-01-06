@@ -1,93 +1,52 @@
 import MaxWidthWrapper from '@/components/all/MaxWidthWrapper';
 import ClientList from '@/components/clients/ClientList';
 import { columns } from '@/components/clients/Columns';
-import { Button } from '@/components/ui/button';
 
 const data = [
   {
     id: '1',
-    username: 'Aditya',
-    email: 'aditya',
+    username: 'JohnDoe',
+    email: 'john.doe@example.com',
   },
   {
     id: '2',
-    username: 'jayesh',
-    email: 'aditya',
+    username: 'JaneSmith',
+    email: 'jane.smith@example.com',
   },
   {
     id: '13',
-    username: 'Aditya',
-    email: 'aditya',
+    username: 'BobJohnson',
+    email: 'bob.johnson@example.com',
   },
   {
     id: '14',
-    username: 'Aditya',
-    email: 'aditya',
+    username: 'AliceWilliams',
+    email: 'alice.williams@example.com',
   },
   {
     id: '15',
-    username: 'Aditya',
-    email: 'aditya',
+    username: 'CharlieBrown',
+    email: 'charlie.brown@example.com',
   },
   {
     id: '16',
-    username: 'Aditya',
-    email: 'aditya',
+    username: 'EvaMiller',
+    email: 'eva.miller@example.com',
   },
   {
     id: '17',
-    username: 'Aditya',
-    email: 'aditya',
-  },
-  {
-    id: '18',
-    username: 'Aditya',
-    email: 'aditya',
-  },
-  {
-    id: '19',
-    username: 'Aditya',
-    email: 'aditya',
-  },
-  {
-    id: '10',
-    username: 'Aditya',
-    email: 'aditya',
-  },
-  {
-    id: '21',
-    username: 'Aditya',
-    email: 'aditya',
-  },
-  {
-    id: '31',
-    username: 'Aditya',
-    email: 'aditya',
-  },
-  {
-    id: '41',
-    username: 'Aditya',
-    email: 'aditya',
-  },
-  {
-    id: '51',
-    username: 'Aditya',
-    email: 'aditya',
-  },
-  {
-    id: '61',
-    username: 'Aditya',
-    email: 'aditya',
+    username: 'SamJones',
+    email: 'sam.jones@example.com',
   },
 ];
 
 const Clients = () => {
   return (
-    <MaxWidthWrapper className='h-full '>
+    <MaxWidthWrapper className='h-full'>
       <div className='mb-8 mt-4'>
-        <h1 className='text-4xl font-bold'>Clients</h1>
+        <h1 className='text-4xl font-bold text-muted-foreground'>Clients</h1>
       </div>
-      <div className='mt-8 h-full flex-1 '>
+      <div className='mt-8 h-full flex-1'>
         <ClientList columns={columns} data={data} />
       </div>
     </MaxWidthWrapper>
