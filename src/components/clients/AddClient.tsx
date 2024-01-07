@@ -4,9 +4,32 @@ import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
 import { Input } from '../ui/input';
 import { Button } from '../ui/button';
 import { Label } from '../ui/label';
+import { SubmitHandler, useForm } from 'react-hook-form';
+import { z } from 'zod';
+import { zodResolver } from '@hookform/resolvers/zod';
+import {
+  ClientValidator,
+  TClientValidator,
+} from '@/lib/validation/client-validation';
+import { cn } from '@/lib/utils';
 
 const AddClient = () => {
-  // TODO: Add client function
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<TClientValidator>({
+    resolver: zodResolver(ClientValidator),
+  });
+
+  const handleCreate: SubmitHandler<TClientValidator> = ({
+    username,
+    email,
+    height,
+    weight,
+  }: TClientValidator) => {
+    console.log(username, email, height, weight);
+  };
 
   return (
     <Dialog>
@@ -14,25 +37,63 @@ const AddClient = () => {
         <Button variant={'secondary'}>New Client</Button>
       </DialogTrigger>
       <DialogContent>
-        <div className='mb-4 space-y-4'>
+        <form onSubmit={handleSubmit(handleCreate)} className='space-y-4'>
           <div className='space-y-1'>
             <Label className=''>Username</Label>
-            <Input />
+            <Input
+              {...register('username')}
+              className={cn({
+                'focus-visible:ring-red-500': errors.username,
+              })}
+            />
+            {errors?.username && (
+              <p className='text-xs text-red-500'>{errors.username.message}</p>
+            )}
           </div>
           <div className='space-y-1'>
-            <Label>Phone Number</Label>
-            <Input />
+            <Label>Email</Label>
+            <Input
+              {...register('email')}
+              className={cn({
+                'focus-visible:ring-red-500': errors.email,
+              })}
+            />
+            {errors?.email && (
+              <p className='text-xs text-red-500'>{errors.email.message}</p>
+            )}
           </div>
           <div className='space-y-1'>
             <Label>Height</Label>
-            <Input />
+            <Input
+              {...register('height', {
+                setValueAs: (v) => parseInt(v),
+              })}
+              className={cn({
+                'focus-visible:ring-red-500': errors.height,
+              })}
+            />
+            {errors?.height && (
+              <p className='text-xs text-red-500'>{errors.height.message}</p>
+            )}
           </div>
           <div className='space-y-1'>
             <Label>Weigth</Label>
-            <Input />
+            <Input
+              {...register('weight', {
+                setValueAs: (v) => parseInt(v),
+              })}
+              className={cn({
+                'focus-visible:ring-red-500': errors.weight,
+              })}
+            />
+            {errors?.weight && (
+              <p className='text-xs text-red-500'>{errors.weight.message}</p>
+            )}
           </div>
-        </div>
-        <Button>Create</Button>
+          <Button type='submit' className='w-full'>
+            Create
+          </Button>
+        </form>
       </DialogContent>
     </Dialog>
   );
