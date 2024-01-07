@@ -21,6 +21,7 @@ import { Button } from '../ui/button';
 import { Input } from '../ui/input';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import AddClient from './AddClient';
 
 interface ClientListProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -59,9 +60,9 @@ const ClientList = <TData, TValue>({
           }
           className='max-w-sm'
         />
-        <Button variant={'secondary'} className='shadow-lg'>
-          Add Client
-        </Button>
+
+        <AddClient />
+       
       </div>
       <div className='rounded-md border mt-4'>
         <Table>

@@ -5,6 +5,7 @@ import { cn } from '@/lib/utils';
 import { useEffect } from 'react';
 import { useMediaQuery } from 'usehooks-ts';
 
+
 const Container = ({ children }: { children: React.ReactNode }) => {
   const { collapsed, onCollapse, onExpand } = useSidebar((state) => state);
 
