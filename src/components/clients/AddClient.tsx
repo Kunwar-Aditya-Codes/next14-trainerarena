@@ -27,9 +27,7 @@ const AddClient = () => {
     email,
     height,
     weight,
-  }: TClientValidator) => {
-    console.log(username, email, height, weight);
-  };
+  }: TClientValidator) => {};
 
   return (
     <Dialog>

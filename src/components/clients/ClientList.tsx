@@ -22,6 +22,7 @@ import { Input } from '../ui/input';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import AddClient from './AddClient';
+import { trpc } from '@/trpc/client';
 
 interface ClientListProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -32,8 +33,9 @@ const ClientList = <TData, TValue>({
   columns,
   data,
 }: ClientListProps<TData, TValue>) => {
+  const { data: res } = trpc.getUser.useQuery();
+
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
-  const router = useRouter();
 
   const table = useReactTable({
     data,
@@ -62,7 +64,6 @@ const ClientList = <TData, TValue>({
         />
 
         <AddClient />
-       
       </div>
       <div className='rounded-md border mt-4'>
         <Table>
