@@ -5,15 +5,25 @@ import { Input } from '../ui/input';
 import { Button } from '../ui/button';
 import { Label } from '../ui/label';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import {
   ClientValidator,
   TClientValidator,
 } from '@/lib/validation/client-validation';
 import { cn } from '@/lib/utils';
+import { trpc } from '@/trpc/client';
+import { Loader2, Plus } from 'lucide-react';
 
 const AddClient = () => {
+  const { mutate, isLoading } = trpc.trainer.createClient.useMutation({
+    onError: (e) => {
+      console.log(e);
+    },
+    onSuccess: ({ success }) => {
+      console.log(success);
+    },
+  });
+
   const {
     register,
     handleSubmit,
@@ -27,12 +37,21 @@ const AddClient = () => {
     email,
     height,
     weight,
-  }: TClientValidator) => {};
+  }: TClientValidator) => {
+    mutate({
+      username,
+      email,
+      height,
+      weight,
+    });
+  };
 
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant={'secondary'}>New Client</Button>
+        <Button variant={'secondary'} size={'sm'}>
+          <Plus className='w-4 h-4 mr-2' /> Add Client
+        </Button>
       </DialogTrigger>
       <DialogContent>
         <form onSubmit={handleSubmit(handleCreate)} className='space-y-4'>
@@ -88,8 +107,12 @@ const AddClient = () => {
               <p className='text-xs text-red-500'>{errors.weight.message}</p>
             )}
           </div>
-          <Button type='submit' className='w-full'>
-            Create
+          <Button type='submit' className='w-full' disabled={isLoading}>
+            {isLoading ? (
+              <Loader2 className='w-5 h-5 animate-spin' />
+            ) : (
+              <>Create</>
+            )}
           </Button>
         </form>
       </DialogContent>

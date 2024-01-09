@@ -1,9 +1,8 @@
-import { publicProcedure, router } from './trpc';
+import { trainerRouter } from './router/trainerRouter';
+import { router } from './trpc';
 
 export const appRouter = router({
-  getUser: publicProcedure.query(() => {
-    return 'hello';
-  }),
+  trainer: trainerRouter,
 });
 
 export type AppRouter = typeof appRouter;
