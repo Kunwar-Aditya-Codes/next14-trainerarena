@@ -13,20 +13,35 @@ import {
 import { cn } from '@/lib/utils';
 import { trpc } from '@/trpc/client';
 import { Loader2, Plus } from 'lucide-react';
+import { useToast } from '../ui/use-toast';
 
 const AddClient = () => {
+  const { toast } = useToast();
+
   const { mutate, isLoading } = trpc.trainer.createClient.useMutation({
     onError: (e) => {
-      console.log(e);
+      if (e?.data?.code === 'CONFLICT') {
+        toast({
+          variant: 'destructive',
+          title: 'Email exists!',
+          description: 'Try with another email. This email is already in use.',
+        });
+      }
     },
     onSuccess: ({ success }) => {
-      console.log(success);
+      if (success) {
+        toast({
+          title: 'Client created!',
+        });
+        reset();
+      }
     },
   });
 
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm<TClientValidator>({
     resolver: zodResolver(ClientValidator),

@@ -17,6 +17,16 @@ export const trainerRouter = router({
 
       const { email, height, username, weight } = input;
 
+      const duplicateEmail = await db.user.findFirst({
+        where: {
+          email,
+        },
+      });
+
+      if (duplicateEmail) {
+        throw new TRPCError({ code: 'CONFLICT' });
+      }
+
       await db.user.create({
         data: {
           email,

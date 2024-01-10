@@ -4,6 +4,7 @@ import { cn, constructMetadata } from '@/lib/utils';
 import { ClerkProvider } from '@clerk/nextjs';
 import { dark } from '@clerk/themes';
 import Providers from '@/components/Providers';
+import { Toaster } from '@/components/ui/toaster';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -30,6 +31,7 @@ export default function RootLayout({
           <Providers>
             <main className='relative flex flex-col min-h-screen'>
               <div className='flex-grow flex-1'>{children}</div>
+              <Toaster />
             </main>
           </Providers>
         </body>

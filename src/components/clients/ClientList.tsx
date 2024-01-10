@@ -4,6 +4,7 @@ import { trpc } from '@/trpc/client';
 import { columns } from './Columns';
 import DataTable from './DataTable';
 import { Skeleton } from '../ui/skeleton';
+import { User } from '@prisma/client';
 
 const data = [
   {
@@ -50,6 +51,8 @@ const ClientList = () => {
     isError,
   } = trpc.trainer.getAllClients.useQuery();
 
+  const data = allClients?.allClients as User[];
+
   if (isLoading) {
     return (
       <div>
@@ -70,6 +73,6 @@ const ClientList = () => {
     );
   }
 
-   return <DataTable columns={columns} data={data} />;
+  return <DataTable columns={columns} data={data} />;
 };
 export default ClientList;

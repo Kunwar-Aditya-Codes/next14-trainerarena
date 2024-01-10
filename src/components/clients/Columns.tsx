@@ -14,10 +14,6 @@ export type Client = {
 
 export const columns: ColumnDef<Client>[] = [
   {
-    accessorKey: 'id',
-    header: 'Id',
-  },
-  {
     accessorKey: 'username',
     header: 'Username',
   },
@@ -32,7 +28,7 @@ export const columns: ColumnDef<Client>[] = [
     cell: ({ row }) => (
       <div className='flex items-center justify-center space-x-4'>
         <Button size={'sm'} asChild>
-          <Link href={`/dashboard/clients/${row.original.username}`}>View</Link>
+          <Link href={`/dashboard/clients/${row.original.id}`}>View</Link>
         </Button>
         <Delete clientId={row.original.id} />
       </div>
