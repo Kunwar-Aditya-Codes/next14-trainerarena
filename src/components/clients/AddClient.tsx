@@ -17,6 +17,7 @@ import { useToast } from '../ui/use-toast';
 
 const AddClient = () => {
   const { toast } = useToast();
+  const utils = trpc.useUtils();
 
   const { mutate, isLoading } = trpc.trainer.createClient.useMutation({
     onError: (e) => {
@@ -34,6 +35,7 @@ const AddClient = () => {
           title: 'Client created!',
         });
         reset();
+        utils.trainer.getAllClients.invalidate();
       }
     },
   });

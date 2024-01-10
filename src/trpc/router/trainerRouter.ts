@@ -58,4 +58,24 @@ export const trainerRouter = router({
 
     return { success: true, allClients };
   }),
+
+  deleteClient: privateProcedure
+    .input(z.object({ clientId: z.string() }))
+    .mutation(async ({ ctx, input }) => {
+      const userId = ctx.userId;
+
+      if (!userId) {
+        throw new TRPCError({ code: 'UNAUTHORIZED' });
+      }
+
+      const { clientId } = input;
+
+      await db.user.delete({
+        where: {
+          id: clientId,
+        },
+      });
+
+      return { success: true };
+    }),
 });
