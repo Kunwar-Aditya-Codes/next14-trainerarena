@@ -45,11 +45,7 @@ const data = [
 ];
 
 const ClientList = () => {
-  const {
-    data: allClients,
-    isLoading,
-    isError,
-  } = trpc.trainer.getAllClients.useQuery();
+  const { data: allClients, isLoading } = trpc.trainer.getAllClients.useQuery();
 
   const data = allClients?.allClients as User[];
 

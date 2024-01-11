@@ -59,6 +59,24 @@ export const trainerRouter = router({
     return { success: true, allClients };
   }),
 
+  getClientById: publicProcedure
+    .input(z.object({ clientId: z.string() }))
+    .query(async ({ input }) => {
+      const { clientId } = input;
+
+      const foundClient = await db.user.findFirst({
+        where: {
+          id: clientId,
+        },
+      });
+
+      if (!foundClient) {
+        throw new TRPCError({ code: 'NOT_FOUND' });
+      }
+
+      return { success: true, foundClient };
+    }),
+
   deleteClient: privateProcedure
     .input(z.object({ clientId: z.string() }))
     .mutation(async ({ ctx, input }) => {
