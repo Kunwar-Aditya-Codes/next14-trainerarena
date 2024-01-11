@@ -32,6 +32,7 @@ const AddClient = () => {
     onSuccess: ({ success }) => {
       if (success) {
         toast({
+          variant: 'success',
           title: 'Client created!',
         });
         reset();

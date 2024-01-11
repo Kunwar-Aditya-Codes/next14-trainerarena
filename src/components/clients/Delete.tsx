@@ -13,6 +13,7 @@ const Delete = ({ clientId }: { clientId: string }) => {
     onSuccess: ({ success }) => {
       if (success) {
         toast({
+          variant: 'success',
           title: 'Client deleted!',
         });
         utils.trainer.getAllClients.invalidate();
