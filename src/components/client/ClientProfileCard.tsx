@@ -21,7 +21,7 @@ const ClientProfileCard = ({ clientId }: { clientId: string }) => {
 
   return (
     <div className='flex-[0.5] pt-0 p-4'>
-      <div className='border rounded-xl shadow-2xl'>
+      <div className='border rounded-xl shadow-lg'>
         <div className='p-4 pt-8 flex items-center justify-center'>
           <Image
             alt='profile_image'
@@ -36,19 +36,19 @@ const ClientProfileCard = ({ clientId }: { clientId: string }) => {
             <h1 className='text-2xl font-normal tracking-wide text-center'>
               Jake Dorsey
             </h1>
-            <Button size={'sm'} className='rounded-xl py-5 px-6'>
+            <Button size={'sm'} className='rounded-[0.6rem] py-5 px-6'>
               New workout
             </Button>
           </div>
 
           <div className='px-4 grid grid-cols-1 gap-y-4 mt-6'>
-            <div className=' py-2 px-4 rounded-xl bg-zinc-900/50 shadow-2xl'>
+            <div className=' py-2 px-4 rounded-xl bg-[#18181b]'>
               <span className='text-xs text-muted-foreground font-medium tracking-wider'>
                 Email
               </span>
               <p className='mt-1 pb-1'>aditya@email.com</p>
             </div>
-            <div className=' py-2 px-4 rounded-xl bg-zinc-900/50 shadow-2xl'>
+            <div className=' py-2 px-4 rounded-xl bg-[#18181b]'>
               <span className='text-xs text-muted-foreground font-medium tracking-wider'>
                 Gender
               </span>
