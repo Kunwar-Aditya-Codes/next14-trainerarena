@@ -4,25 +4,25 @@ import { Button } from '../ui/button';
 import { trpc } from '@/trpc/client';
 import { useToast } from '../ui/use-toast';
 
-const Delete = ({ clientId }: { clientId: string }) => {
+const Delete = ({ id }: { id: string }) => {
   const { toast } = useToast();
 
   const utils = trpc.useUtils();
 
-  const { mutate, isLoading } = trpc.trainer.deleteClient.useMutation({
+  const { mutate, isLoading } = trpc.exercise.deleteExcercise.useMutation({
     onSuccess: ({ success }) => {
       if (success) {
         toast({
           variant: 'success',
-          title: 'Client deleted!',
+          title: 'Exercise deleted!',
         });
-        utils.trainer.getAllClients.invalidate();
+        utils.exercise.getAllExercises.invalidate();
       }
     },
   });
 
   const handleClick = () => {
-    mutate({ clientId });
+    mutate({ id });
   };
 
   return (

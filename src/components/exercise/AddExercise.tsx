@@ -42,6 +42,10 @@ const AddExercise = () => {
 
   const form = useForm<TExerciseValidator>({
     resolver: zodResolver(ExerciseValidator),
+    defaultValues: {
+      category: '',
+      name: '',
+    },
   });
 
   const handleCreate: SubmitHandler<TExerciseValidator> = ({

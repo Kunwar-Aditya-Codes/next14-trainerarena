@@ -24,7 +24,7 @@ export const columns: ColumnDef<Exercise>[] = [
     header: 'Actions',
     cell: ({ row }) => (
       <div className='flex items-center justify-center space-x-4'>
-        <Delete clientId={row.original.id} />
+        <Delete id={row.original.id} />
       </div>
     ),
   },
