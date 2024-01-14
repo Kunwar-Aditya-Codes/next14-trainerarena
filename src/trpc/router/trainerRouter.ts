@@ -17,7 +17,7 @@ export const trainerRouter = router({
 
       const { email, height, username, weight } = input;
 
-      const duplicateEmail = await db.user.findFirst({
+      const duplicateEmail = await db.client.findFirst({
         where: {
           email,
         },
@@ -27,7 +27,7 @@ export const trainerRouter = router({
         throw new TRPCError({ code: 'CONFLICT' });
       }
 
-      await db.user.create({
+      await db.client.create({
         data: {
           email,
           height,
@@ -50,7 +50,7 @@ export const trainerRouter = router({
       });
     }
 
-    const allClients = await db.user.findMany({
+    const allClients = await db.client.findMany({
       where: {
         trainerId,
       },
@@ -64,7 +64,7 @@ export const trainerRouter = router({
     .query(async ({ input }) => {
       const { clientId } = input;
 
-      const foundClient = await db.user.findFirst({
+      const foundClient = await db.client.findFirst({
         where: {
           id: clientId,
         },
@@ -88,7 +88,7 @@ export const trainerRouter = router({
 
       const { clientId } = input;
 
-      await db.user.delete({
+      await db.client.delete({
         where: {
           id: clientId,
         },

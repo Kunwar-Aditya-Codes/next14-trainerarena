@@ -19,6 +19,8 @@ const ClientProfileCard = ({ clientId }: { clientId: string }) => {
     );
   }
 
+  const profileInfo = clientProfile?.foundClient;
+
   return (
     <div className='flex-[0.5] pt-0 p-4'>
       <div className='border rounded-xl shadow-lg'>
@@ -34,7 +36,7 @@ const ClientProfileCard = ({ clientId }: { clientId: string }) => {
         <div className='pb-4'>
           <div className='flex flex-col items-center gap-y-4'>
             <h1 className='text-2xl font-normal tracking-wide text-center'>
-              Jake Dorsey
+              {profileInfo?.username}
             </h1>
             <Button size={'sm'} className='rounded-[0.6rem] py-5 px-6'>
               New workout
@@ -46,7 +48,7 @@ const ClientProfileCard = ({ clientId }: { clientId: string }) => {
               <span className='text-xs text-muted-foreground font-medium tracking-wider'>
                 Email
               </span>
-              <p className='mt-1 pb-1'>aditya@email.com</p>
+              <p className='mt-1 pb-1'>{profileInfo?.email}</p>
             </div>
             <div className=' py-2 px-4 rounded-xl bg-[#18181b]'>
               <span className='text-xs text-muted-foreground font-medium tracking-wider'>

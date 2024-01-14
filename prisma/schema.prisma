@@ -7,12 +7,37 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model User {
-  id         String  @id @default(auto()) @map("_id") @db.ObjectId
-  email      String  @unique
+model Client {
+  id         String    @id @default(auto()) @map("_id") @db.ObjectId
+  email      String    @unique
   username   String
   height     Int
   weight     Int
   profilePic String?
   trainerId  String
+  workouts   Workout[]
+}
+
+model Exercise {
+  id       String @id @default(auto()) @map("_id") @db.ObjectId
+  name     String
+  category String
+}
+
+model WorkingSet {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  name      String
+  weights   Int
+  reps      Int
+  Workout   Workout? @relation(fields: [workoutId], references: [id])
+  workoutId String?  @db.ObjectId
+}
+
+model Workout {
+  id        String       @id @default(auto()) @map("_id") @db.ObjectId
+  name      String
+  date      DateTime
+  exercises WorkingSet[]
+  client    Client       @relation(fields: [clientId], references: [id])
+  clientId  String       @db.ObjectId
 }
